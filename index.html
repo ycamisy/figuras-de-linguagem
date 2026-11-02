@@ -226,8 +226,6 @@
 </head>
 
 <body>
-    <img src="https://static.wikia.nocookie.net/camp-halfblood-fanon/images/c/ca/Unknown.jpeg/revision/latest?cb=20200614091044"
-     style="position:absolute;top:0;left:0;width:24px;height:auto;z-index:10" alt="">
     <main>
         <h1><mark>Par Perfeito</mark></h1>
         <p>Jogo da memória: junte cada <b>figura de linguagem</b> ao <b>exemplo</b> que combina com ela.</p>
@@ -235,7 +233,15 @@
         <button class="go main" id="start">Embaralhar e jogar</button>
 
         <div id="game" class="hidden">
-            <div class="hud"><span id="mv"></span><span id="pr"></span><span id="tm"></span></div>
+            <div class="hud">
+    <span id="mv"></span>
+    <span id="pr"></span>
+    <span style="display:inline-flex;align-items:center;gap:6px">
+        <span id="tm"></span>
+        <img src="https://static.wikia.nocookie.net/camp-halfblood-fanon/images/c/ca/Unknown.jpeg/revision/latest?cb=20200614091044"
+             style="height:28px;width:auto;border-radius:4px" alt="">
+    </span>
+</div>
             <div class="board" id="board"></div>
             <div class="note" id="note" aria-live="polite">Vire duas cartas.</div>
         </div>
