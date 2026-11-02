@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Par Perfeito: figuras de linguagem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f1f5fa;
+            --grid: #d3dff0;
+            --ink: #16254a;
+            --mute: #51618a;
+            --card: #fff;
+            --back: #16254a;
+            --backink: #ffe14d;
+            --hi: #ffe14d;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0f1830;
+                --grid: #1c2a4d;
+                --ink: #eaf0ff;
+                --mute: #9fb0d8;
+                --card: #17244a;
+                --back: #eaf0ff;
+                --backink: #16254a
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0f1830;
+            --grid: #1c2a4d;
+            --ink: #eaf0ff;
+            --mute: #9fb0d8;
+            --card: #17244a;
+            --back: #eaf0ff;
+            --backink: #16254a
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Bricolage Grotesque", system-ui, sans-serif;
+            color: var(--ink);
+            background-color: var(--bg);
+            background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 28px 28px
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 14px 48px
+        }
+
+        h1 {
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 800;
+            margin: 8px 0 4px;
+            letter-spacing: -.02em;
+            line-height: 1
+        }
+
+        h1 mark {
+            background: var(--hi);
+            color: #16254a;
+            padding: 0 .2em;
+            border-radius: 3px
+        }
+
+        p {
+            line-height: 1.45
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+            cursor: pointer
+        }
+
+        button:focus-visible {
+            outline: 3px solid var(--hi);
+            outline-offset: 2px
+        }
+
+        .lv {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 14px 0
+        }
+
+        .go {
+            padding: 10px 18px;
+            border: 2px solid var(--ink);
+            background: var(--card);
+            border-radius: 10px;
+            font-weight: 600
+        }
+
+        .go.on {
+            background: var(--ink);
+            color: var(--bg)
+        }
+
+        .go.main {
+            background: var(--hi);
+            color: #16254a;
+            font-weight: 800
+        }
+
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin: 8px 0 12px;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .board {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(135px, 1fr))
+        }
+
+        .c {
+            position: relative;
+            min-height: 112px;
+            padding: 10px;
+            border: 2px solid var(--ink);
+            border-radius: 12px;
+            background: var(--back);
+            color: var(--backink);
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2
+        }
+
+        .c.up,
+        .c.ok {
+            background: var(--card);
+            color: var(--ink);
+            font-size: .95rem;
+            font-weight: 600
+        }
+
+        .c.n.up,
+        .c.n.ok {
+            font-size: 1.15rem;
+            font-weight: 800
+        }
+
+        .c.ok {
+            border-color: var(--col);
+            box-shadow: 4px 4px 0 var(--col);
+            cursor: default
+        }
+
+        .c.bad {
+            animation: sh .3s
+        }
+
+        @keyframes sh {
+            25% {
+                transform: translateX(-4px)
+            }
+
+            75% {
+                transform: translateX(4px)
+            }
+        }
+
+        .note {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border: 2px dashed var(--ink);
+            border-radius: 10px;
+            background: var(--card);
+            min-height: 3.2em
+        }
+
+        .end {
+            text-align: center;
+            background: var(--card);
+            border: 2px solid var(--ink);
+            border-radius: 14px;
+            padding: 26px 16px;
+            margin-top: 14px
+        }
+
+        .end .big {
+            font-size: 2.6rem;
+            font-weight: 800
+        }
+
+        .hidden {
+            display: none
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            .c.bad {
+                animation: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1><mark>Par Perfeito</mark></h1>
+        <p>Jogo da memória: junte cada <b>figura de linguagem</b> ao <b>exemplo</b> que combina com ela.</p>
+        <div class="lv" id="lv"></div>
+        <button class="go main" id="start">Embaralhar e jogar</button>
+
+        <div id="game" class="hidden">
+            <div class="hud"><span id="mv"></span><span id="pr"></span><span id="tm"></span></div>
+            <div class="board" id="board"></div>
+            <div class="note" id="note" aria-live="polite">Vire duas cartas.</div>
+        </div>
+        <div id="end" class="end hidden">
+            <div class="big" id="e1"></div>
+            <p id="e2"></p>
+            <button class="go main" id="again">Jogar de novo</button>
+        </div>
+    </main>
+
+    <script>
+        var P = [
+            ["Metáfora", "Meu irmão é uma rocha.", "Compara sem usar “como”: o irmão é firme, forte.", "#2f6fed"],
+            ["Comparação", "Ela é rápida como um raio.", "Compara com conectivo (como, tal qual, feito).", "#e0457b"],
+            ["Metonímia", "Passei o fim de semana lendo Machado de Assis.", "Troca uma coisa por outra ligada a ela: o autor pela obra.", "#e8890c"],
+            ["Hipérbole", "Já te falei um milhão de vezes!", "Exagero para dar ênfase.", "#1f9d8a"],
+            ["Ironia", "Que ótimo, choveu no dia da minha festa.", "Diz o contrário do que se pensa.", "#7a4fd6"],
+            ["Eufemismo", "Ele partiu dessa para melhor.", "Suaviza algo desagradável (morrer).", "#5a8f1d"],
+            ["Antítese", "Ele ri por fora e chora por dentro.", "Aproxima ideias opostas.", "#c2410c"],
+            ["Paradoxo", "Estou sozinho no meio da multidão.", "Ideias contraditórias que fazem sentido juntas.", "#0e7490"],
+            ["Prosopopeia", "O vento sussurrou segredos nas janelas.", "Dá ações humanas a seres não humanos.", "#a21caf"],
+            ["Onomatopeia", "O relógio fazia tique-taque.", "Imita sons com palavras.", "#4d7c0f"],
+            ["Aliteração", "A rua rangia, o rio rugia.", "Repetição de sons consonantais.", "#b91c1c"],
+            ["Pleonasmo", "Entrou para dentro de casa.", "Repete uma ideia, por ênfase ou por vício.", "#1d4ed8"],
+            ["Sinestesia", "Ouvi uma voz doce e perfumada.", "Mistura sentidos: audição, paladar, olfato.", "#be185d"],
+            ["Gradação", "Ele hesitou, tremeu, desabou.", "Sequência de ideias em ordem crescente ou decrescente.", "#047857"]
+        ];
+        var LV = { "Fácil (6 pares)": 6, "Médio (9 pares)": 9, "Difícil (14 pares)": 14 };
+        var $ = function (i) { return document.getElementById(i) };
+        var size = 6, first = null, lock = false, moves = 0, found = 0, total = 0, t0 = 0, timer = null;
+        var lv = $("lv");
+        Object.keys(LV).forEach(function (k, n) {
+            var b = document.createElement("button"); b.className = "go" + (n === 0 ? " on" : ""); b.textContent = k;
+            b.onclick = function () { size = LV[k];[].forEach.call(lv.children, function (x) { x.classList.remove("on") }); b.classList.add("on") };
+            lv.appendChild(b);
+        });
+        function shuffle(a) { a = a.slice(); for (var k = a.length - 1; k > 0; k--) { var j = Math.floor(Math.random() * (k + 1)); var t = a[k]; a[k] = a[j]; a[j] = t } return a }
+        function fmt(s) { var m = Math.floor(s / 60), r = s % 60; return m + ":" + (r < 10 ? "0" : "") + r }
+        function hud() { $("mv").textContent = "Jogadas: " + moves; $("pr").textContent = "Pares: " + found + "/" + total }
+        function start() {
+            clearInterval(timer);
+            var pick = shuffle(P).slice(0, size), cards = [];
+            pick.forEach(function (p) { cards.push({ id: p[0], t: p[0], k: "n", p: p }); cards.push({ id: p[0], t: p[1], k: "x", p: p }) });
+            cards = shuffle(cards);
+            first = null; lock = false; moves = 0; found = 0; total = size;
+            $("end").classList.add("hidden"); $("game").classList.remove("hidden");
+            $("note").textContent = "Vire duas cartas.";
+            var bd = $("board"); bd.innerHTML = "";
+            cards.forEach(function (c) {
+                var b = document.createElement("button"); b.className = "c " + c.k; b.textContent = "?"; b.setAttribute("aria-label", "Carta virada para baixo");
+                b.onclick = function () { flip(b, c) }; bd.appendChild(b);
+            });
+            hud(); t0 = Date.now(); $("tm").textContent = "Tempo: 0:00";
+            timer = setInterval(function () { $("tm").textContent = "Tempo: " + fmt(Math.floor((Date.now() - t0) / 1000)) }, 500);
+        }
+        function up(b, c) { b.classList.add("up"); b.textContent = c.t }
+        function down(b) { b.classList.remove("up"); b.textContent = "?" }
+        function flip(b, c) {
+            if (lock || b.classList.contains("up") || b.classList.contains("ok")) return;
+            up(b, c);
+            if (!first) { first = { b: b, c: c }; return }
+            moves++; var a = first; first = null;
+            if (a.c.id === c.id && a.c.k !== c.k) {
+                [a.b, b].forEach(function (x) { x.classList.remove("up"); x.classList.add("ok"); x.style.setProperty("--col", c.p[3]) });
+                found++; $("note").innerHTML = "<b>" + c.p[0] + ":</b> " + c.p[2]; hud();
+                if (found === total) finish();
+            } else {
+                lock = true;[a.b, b].forEach(function (x) { x.classList.add("bad") });
+                setTimeout(function () { [a.b, b].forEach(function (x) { x.classList.remove("bad"); down(x) }); lock = false }, 900);
+                $("note").textContent = "Não é par. Memorize o lugar e tente de novo."; hud();
+            }
+        }
+        function finish() {
+            clearInterval(timer);
+            var s = Math.floor((Date.now() - t0) / 1000);
+            $("end").classList.remove("hidden");
+            $("e1").textContent = moves + " jogadas";
+            var best = total, r = moves <= best * 1.6 ? "Memória de elefante!" : moves <= best * 2.6 ? "Muito bom!" : "Boa! Com mais uma rodada, você melhora.";
+            $("e2").textContent = r + " Tempo: " + fmt(s) + ". Menos jogadas é melhor.";
+            $("end").scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+        $("start").onclick = start; $("again").onclick = start;
+    </script>
+</body>
+
+</html>
